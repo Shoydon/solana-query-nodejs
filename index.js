@@ -127,7 +127,7 @@ app.get("/tx/:sign/signer", (req, res) => {
 // get_transaction
 app.get("/tx/:sign/full", (req, res) => {
     const { sign } = req.params;
-    db.query(`For tx IN transactions FILTER tx.signature == ${sign} RETURN tx`)
+    db.query(`For tx IN transactions FILTER tx.signature == '${sign}' RETURN tx`)
     .then(cursor => cursor.all())
     .then(tx => {
         if (tx.length > 0) {
