@@ -245,7 +245,7 @@ app.get("/program/:program_id/accounts", (req, res) => {
     const { program_id } = req.params;
     db.query(`
         FOR pid IN triggers
-        FILTER pid._to == CONCAT('program/', ${program_id})
+        FILTER pid._to == CONCAT('program/', '${program_id}')
         RETURN {
             address: pid._from,
             tx: pid.tx
