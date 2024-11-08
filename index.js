@@ -219,7 +219,7 @@ app.get("/program/:program_id/logs", (req, res) => {
 app.get("/program/:program_id/accounts/:start_block/:end_block", (req, res) => {
     const { program_id, start_block, end_block } = req.params;
     db.query(`
-        FOR pid IN triggers
+        FOR pid IN trrigers
         FILTER pid._to == CONCAT('program/', '${program_id}')
         FOR t IN transactions
         FILTER t.signature == pid.tx
@@ -244,7 +244,7 @@ app.get("/program/:program_id/accounts/:start_block/:end_block", (req, res) => {
 app.get("/program/:program_id/accounts", (req, res) => {
     const { program_id } = req.params;
     db.query(`
-        FOR pid IN triggers
+        FOR pid IN trrigers
         FILTER pid._to == CONCAT('program/', '${program_id}')
         RETURN {
             address: pid._from,
