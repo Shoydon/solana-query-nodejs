@@ -245,12 +245,12 @@ app.get("/program/:program_id/accounts", (req, res) => {
     const { program_id } = req.params;
     db.query(`
         FOR pid IN triggers
-        FILTER pid._to == CONCAT('program/', @programId)
+        FILTER pid._to == CONCAT('program/', ${program_id})
         RETURN {
             address: pid._from,
             tx: pid.tx
         }
-    `, { programId: program_id })
+    `)
     .then(cursor => cursor.all())
     .then(result => {
         if (result.length > 0) {
